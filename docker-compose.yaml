@@ -9,9 +9,13 @@ services:
       EULA: "TRUE"
       DIFFICULTY: "normal"
       SERVER_NAME: "Server DDD"
-#      TYPE: "CURSEFORGE"
-#      CF_SERVER_MOD: "/modpacks/name_of_modpack.zip"
-#      WORLD: "/worlds/basic"
+      TYPE: "FABRIC"
+      VERSION: "1.19.2"
+      OPS: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553"
+      CF_BASE_DIR: "/data"
+      #CF_SERVER_MOD: "/modpacks/name_of_modpack.zip"
+      WORLD: "/worlds/basic"
+      MEMORY: 8G    
     tty: true
     stdin_open: true
     restart: unless-stopped
