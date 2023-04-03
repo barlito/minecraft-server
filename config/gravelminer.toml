@@ -1,0 +1,8 @@
+[common]
+gravelBlocks = ["minecraft:gravel"]
+triggerOnGravel = true
+isOptIn = true
+rollFlintChance = true
+[client]
+isEnabled = true
+activation = "ALWAYS"

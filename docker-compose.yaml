@@ -2,16 +2,17 @@ version: "3"
 
 services:
   mc:
-    image: itzg/minecraft-server
+    image: itzg/minecraft-server:java17
     ports:
       - 25565:25565
     environment:
       EULA: "TRUE"
-      DIFFICULTY: "normal"
+      DIFFICULTY: "hard"
       SERVER_NAME: "Server DDD"
-#      TYPE: "CURSEFORGE"
-#      CF_SERVER_MOD: "/modpacks/name_of_modpack.zip"
-#      WORLD: "/worlds/basic"
+      TYPE: "FABRIC"
+      OPS: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553"
+      MEMORY: 8G
+      VERSION: 1.19.2
     tty: true
     stdin_open: true
     restart: unless-stopped
@@ -21,3 +22,4 @@ services:
       - ./modpacks:/modpacks
       - ./mods:/data/mods
       - ./plugins:/data/plugins
+      - ./config/:/data/config

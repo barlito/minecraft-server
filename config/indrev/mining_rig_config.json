@@ -1,0 +1,22 @@
+{
+  "allowedTags": {
+    "minecraft:copper_ores": 1,
+    "minecraft:coal_ores": 1,
+    "minecraft:gold_ores": 2,
+    "minecraft:iron_ores": 2,
+    "c:cheese_ores": 2,
+    "c:desh_ores": 2,
+    "c:ice_shard_ores": 2,
+    "c:ostrum_ores": 3,
+    "c:calorite_ores": 4,
+    "c:nikolite_ores": 2,
+    "minecraft:redstone_ores": 2,
+    "c:tungsten_ores": 3,
+    "minecraft:diamond_ores": 4,
+    "minecraft:emerald_ores": 4,
+    "c:uraninite_ores_poor": 2,
+    "c:uraninite_ores_standard": 3,
+    "c:uraninite_ores_dense": 4,
+    "c:ancient_debris_ores": 5
+  }
+}
