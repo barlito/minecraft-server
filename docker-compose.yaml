@@ -2,16 +2,20 @@ version: "3"
 
 services:
   mc:
-    image: itzg/minecraft-server
+    image: itzg/minecraft-server:java17
     ports:
       - 25565:25565
     environment:
       EULA: "TRUE"
       DIFFICULTY: "normal"
       SERVER_NAME: "Server DDD"
-#      TYPE: "CURSEFORGE"
-#      CF_SERVER_MOD: "/modpacks/name_of_modpack.zip"
-#      WORLD: "/worlds/basic"
+      TYPE: "FABRIC"
+      OPS: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553"
+      MEMORY: 8G
+      VERSION: 1.20.1
+      MOTD: "Bienvenue sur le serveur des Youls 2024"
+      ICON: "https://cdn.discordapp.com/icons/188982456324456448/6d541df933bd05689ab8a545bbbce6cb.webp"
+      ENABLE_AUTOPAUSE: "TRUE"
     tty: true
     stdin_open: true
     restart: unless-stopped
