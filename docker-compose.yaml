@@ -9,7 +9,7 @@ services:
       EULA: "TRUE"
       DIFFICULTY: "normal"
       SERVER_NAME: "Server DDD"
-      TYPE: "PAPER"
+      TYPE: "FABRIC"
       OPS: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553"
       MEMORY: 8G
       VERSION: 1.20.4
