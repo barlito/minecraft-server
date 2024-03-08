@@ -5,7 +5,7 @@ services:
     image: itzg/minecraft-server:java17
     ports:
       - 25565:25565
-      - 24454:24454
+      - 24454:24454/udp
     environment:
       EULA: "TRUE"
       DIFFICULTY: "hard"
@@ -19,7 +19,8 @@ services:
       ENABLE_AUTOPAUSE: "TRUE"
       ENABLE_WHITELIST: "TRUE"
       OVERRIDE_WHITELIST: "TRUE"      
-      WHITELIST: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553,ggWarny,d04cc87c-c844-4a66-8800-226b269b5356,ggWilly,a399c5cc-a4a4-4106-9005-3e1c58c20d16,Mr__Valk,76e2d9f2-e931-4eaa-a94a-dad3bf46b122,Tykaa,9f672e7f-ad9f-4271-aaac-784129b3a99e,Nonoldkm"
+      WHITELIST: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553,ggWarny,d04cc87c-c844-4a66-8800-226b269b5356,ggWilly,a399c5cc-a4a4-4106-9005-3e1c58c20d16,Mr__Valk,76e2d9f2-e931-4eaa-a94a-dad3bf46b122,Tykaa,9f672e7f-ad9f-4271-aaac-784129b3a99e"
+      MAX_TICK_TIME: -1
     tty: true
     stdin_open: true
     restart: unless-stopped
@@ -29,3 +30,4 @@ services:
       - ./modpacks:/modpacks
       - ./mods:/data/mods
       - ./plugins:/data/plugins
+
