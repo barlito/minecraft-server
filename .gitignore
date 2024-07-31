@@ -1,3 +1,11 @@
 .idea
 minecraft-data
 !minecraft-data/.gitkeep
+mods
+!mods/.gitkeep
+modpacks
+!modpacks/.gitkeep
+plugins
+!plugins/.gitkeep
+worlds
+!worlds/.gitkeep
