@@ -11,7 +11,7 @@ services:
       DIFFICULTY: "hard"
       SERVER_NAME: "Server DDD"
       TYPE: "FABRIC"
-      OPS: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553"
+      OPS: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553,ggWilly,a399c5cc-a4a4-4106-9005-3e1c58c20d16"
       MEMORY: 8G
       VERSION: 1.20.4
       MOTD: "Bienvenue sur le serveur des Youls 2024"
