@@ -1,4 +1,4 @@
-stack_name=minecraft_server
+stack_name=minecraft-bcg_mc_1
 
 app_container_id = $(shell docker ps --filter name="$(stack_name)" -q)
 
