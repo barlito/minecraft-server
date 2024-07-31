@@ -9,13 +9,13 @@ services:
       EULA: "TRUE"
       DIFFICULTY: "hard"
       SERVER_NAME: "Youlz Server"
-      TYPE: "FABRIC"
+      TYPE: "FORGE"
       OPS: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553,ggWilly,a399c5cc-a4a4-4106-9005-3e1c58c20d16"
       EXISTING_OPS_FILE: "SYNCHRONIZE"
       MEMORY: 8G
-      VERSION: 1.20.6
-      MOTD: "Bienvenue sur le serveur des Youlz"
-      ICON: "https://cdn.discordapp.com/icons/188982456324456448/6d541df933bd05689ab8a545bbbce6cb.webp"
+      VERSION: 1.20.1
+      MOTD: "Bienvenue sur le serveur des BigChadGuys Youlz + Warny Edit avec les Cobblemon"
+      ICON: "https://media.forgecdn.net/avatars/thumbnails/1016/705/256/256/638542712707334873_animated.gif"
       ENABLE_AUTOPAUSE: "TRUE"
       ENABLE_WHITELIST: "TRUE"
       OVERRIDE_WHITELIST: "TRUE"
