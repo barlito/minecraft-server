@@ -12,13 +12,17 @@ deploy:
 
 .PHONY: undeploy
 undeploy:
+	make save-world
 	docker-compose down
 
 .PHONY: restart
 restart:
-	docker exec minecraft-vanilla-2024_mc_1 rcon-cli /save-all
 	make undeploy
 	make deploy
+
+.PHONY: save-world
+save-world:
+	docker exec minecraft-vanilla-2024_mc_1 rcon-cli /save-all
 
 .PHONY: logs
 logs:
