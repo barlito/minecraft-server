@@ -1,3 +1,5 @@
 .idea
 minecraft-data
 !minecraft-data/.gitkeep
+mods
+!mods/.gitkeep
