@@ -9,7 +9,9 @@ services:
       EULA: "TRUE"
       DIFFICULTY: "hard"
       SERVER_NAME: "Youlz Server"
-      TYPE: "FORGE"
+      MODRINTH_MODPACK: "/modpacks/BCG_Warny_Edit.mrpack"
+      MODRINTH_LOADER: "FABRIC"
+      TYPE: "MODRINTH"
       OPS: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553,ggWilly,a399c5cc-a4a4-4106-9005-3e1c58c20d16"
       EXISTING_OPS_FILE: "SYNCHRONIZE"
       MEMORY: 8G
