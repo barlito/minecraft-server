@@ -7,7 +7,7 @@ services:
       - 20242:25565
     environment:
       EULA: "TRUE"
-      DIFFICULTY: "hard"
+      DIFFICULTY: "easy"
       SERVER_NAME: "Youlz Server"
       MODRINTH_MODPACK: "/modpacks/BCG_Warny_Edit.mrpack"
       MODRINTH_LOADER: "FABRIC"
