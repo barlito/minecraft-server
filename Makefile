@@ -8,12 +8,12 @@ bash:
 
 .PHONY: deploy
 deploy:
-	docker-compose up -d
+	docker compose up -d
 
 .PHONY: undeploy
 undeploy:
 	make save-world
-	docker-compose down
+	docker compose down
 
 .PHONY: restart
 restart:
@@ -26,7 +26,7 @@ save-world:
 
 .PHONY: logs
 logs:
-	docker-compose logs -f
+	docker compose logs -f
 
 .PHONY: send-message
 send-message:
