@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  mc:
+    image: itzg/minecraft-server:java17
+    ports:
+      - 20242:25565
+    environment:
+      EULA: "TRUE"
+      DIFFICULTY: "hard"
+      SERVER_NAME: "Youlz Server"
+      TYPE: "FABRIC"
+      OPS: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553,ggWilly,a399c5cc-a4a4-4106-9005-3e1c58c20d16"
+      EXISTING_OPS_FILE: "SYNCHRONIZE"
+      MEMORY: 8G
+      VERSION: 1.20.6
+      MOTD: "Bienvenue sur le serveur des Youlz"
+      ICON: "https://cdn.discordapp.com/icons/188982456324456448/6d541df933bd05689ab8a545bbbce6cb.webp"
+      ENABLE_AUTOPAUSE: "TRUE"
+      ENABLE_WHITELIST: "TRUE"
+      OVERRIDE_WHITELIST: "TRUE"
+      WHITELIST: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553,ggWarny,d04cc87c-c844-4a66-8800-226b269b5356,ggWilly,a399c5cc-a4a4-4106-9005-3e1c58c20d16,Mr__Valk,76e2d9f2-e931-4eaa-a94a-dad3bf46b122,Tykaa,9f672e7f-ad9f-4271-aaac-784129b3a99e"
+      MAX_TICK_TIME: -1
+      VIEW_DISTANCE: 32
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    volumes:
+      - ./minecraft-data:/data
+      - ./worlds:/worlds:ro
+      - ./modpacks:/modpacks
+      - ./mods:/data/mods
+      - ./plugins:/data/plugins
