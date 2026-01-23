@@ -1,6 +1,5 @@
-stack_name=minecraft_server
-
-app_container_id = $(shell docker ps --filter name="$(stack_name)" -q)
+# Get container ID using docker-compose
+app_container_id = $(shell docker-compose ps -q mc)
 
 .PHONY: bash
 bash:
@@ -31,3 +30,31 @@ logs:
 .PHONY: send-message
 send-message:
 	docker exec $(app_container_id) rcon-cli /say $(MESSAGE)
+
+.PHONY: status
+status:
+	docker-compose ps
+
+.PHONY: backup
+backup:
+	@echo "Creating backup..."
+	tar -czf backup-$(shell date +%Y%m%d-%H%M%S).tar.gz minecraft-data worlds mods plugins modpacks
+	@echo "Backup created: backup-$(shell date +%Y%m%d-%H%M%S).tar.gz"
+
+.PHONY: console
+console:
+	docker attach $(app_container_id)
+
+.PHONY: help
+help:
+	@echo "Available commands:"
+	@echo "  make deploy        - Start the Minecraft server"
+	@echo "  make undeploy      - Save world and stop the server"
+	@echo "  make restart       - Restart the server"
+	@echo "  make logs          - Stream server logs"
+	@echo "  make status        - Show container status"
+	@echo "  make bash          - Access container shell (root)"
+	@echo "  make console       - Attach to server console"
+	@echo "  make save-world    - Force save the world"
+	@echo "  make backup        - Create a backup of all server data"
+	@echo "  make send-message  - Send message to players (use MESSAGE='text')"

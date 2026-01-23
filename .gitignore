@@ -1,4 +1,8 @@
+# IDE
 .idea
+.vscode
+
+# Minecraft Server Data (managed via Docker volumes)
 minecraft-data
 !minecraft-data/.gitkeep
 mods
@@ -9,3 +13,15 @@ plugins
 !plugins/.gitkeep
 worlds
 !worlds/.gitkeep
+
+# Backups
+backups/
+*.tar.gz
+*.zip
+
+# Environment
+.env
+
+# Logs
+*.log
+*.log.gz
