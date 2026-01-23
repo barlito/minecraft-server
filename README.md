@@ -9,6 +9,13 @@ A production-ready, containerized Minecraft Fabric server with easy deployment a
 git clone git@github.com:barlito/minecraft-server.git
 cd minecraft-server
 
+# Copy your modpack file (.mrpack) to the server
+# Example:
+scp ~/Downloads/your-modpack.mrpack user@server:/path/to/minecraft-server/modpacks/modpack.mrpack
+
+# If using custom SSH port, add -P flag:
+# scp -P 3333 ~/Downloads/your-modpack.mrpack user@server:/path/to/minecraft-server/modpacks/modpack.mrpack
+
 # Start the server
 make deploy
 
@@ -24,15 +31,6 @@ The server will be available on port `20242`.
 - Docker Compose
 - Make (optional, for convenience commands)
 
-## Architecture
-
-This setup uses:
-- **Server Type**: Fabric
-- **Minecraft Version**: 1.20.6
-- **Docker Image**: `itzg/minecraft-server:java17`
-- **Memory Allocation**: 8GB
-- **Auto-pause**: Enabled (saves resources when no players online)
-
 ## Server Configuration
 
 ### Environment Variables
@@ -40,16 +38,16 @@ This setup uses:
 All server configuration is managed via environment variables in `docker-compose.yaml`:
 
 ```yaml
-EULA: "TRUE"                    # Accept Mojang EULA
-DIFFICULTY: "hard"              # Difficulty level
-SERVER_NAME: "Youlz Server"     # Server name
-TYPE: "FABRIC"                  # Mod loader type
-VERSION: 1.20.6                 # Minecraft version
-MEMORY: 8G                      # RAM allocation
-VIEW_DISTANCE: 32               # Chunk view distance
-ENABLE_AUTOPAUSE: "TRUE"        # Auto-pause when empty
-ENABLE_WHITELIST: "TRUE"        # Whitelist enabled
-MAX_TICK_TIME: -1               # Disable tick timeout (prevents autopause crash)
+EULA: "TRUE"                         # Accept Mojang EULA
+DIFFICULTY: "hard"                   # Difficulty level
+SERVER_NAME: "Youlz Server"          # Server name
+TYPE: "MODRINTH"                     # Use Modrinth modpack
+MODRINTH_MODPACK: "/modpacks/modpack.mrpack"  # Path to .mrpack file
+MEMORY: 8G                           # RAM allocation
+VIEW_DISTANCE: 32                    # Chunk view distance
+ENABLE_AUTOPAUSE: "TRUE"             # Auto-pause when empty
+ENABLE_WHITELIST: "TRUE"             # Whitelist enabled
+MAX_TICK_TIME: -1                    # Disable tick timeout (prevents autopause crash)
 ```
 
 To modify settings, edit `docker-compose.yaml` and restart the server with `make restart`.
@@ -82,39 +80,69 @@ minecraft-server/
 
 ## Custom Modpack Deployment
 
-Since this repository only tracks configuration files (not mod JARs), you need to deploy your custom modpack separately.
+This server is configured to use Modrinth modpack files (.mrpack format).
 
-### Method 1: Local rsync (Recommended)
+### Deploying a Modpack
+
+**Step 1: Get your .mrpack file**
+
+Download your modpack from Modrinth or export it from your launcher (Prism, ATLauncher, etc.)
+
+**Step 2: Copy to server**
 
 ```bash
-# From your local machine with the modpack prepared
-rsync -avz --progress ./mods/ user@server:/path/to/minecraft-server/mods/
-rsync -avz --progress ./config/ user@server:/path/to/minecraft-server/minecraft-data/config/
+# Copy the modpack file to the server
+scp /path/to/your/modpack.mrpack user@server:/path/to/minecraft-server/modpacks/modpack.mrpack
 
-# Then deploy the server
-ssh user@server "cd /path/to/minecraft-server && make deploy"
+# Example:
+scp ~/Downloads/cobbleverse-1.7.2.mrpack user@server:/home/user/minecraft-server/modpacks/modpack.mrpack
+
+# If using custom SSH port, add -P flag:
+# scp -P 2222 ~/Downloads/modpack.mrpack user@server:/path/to/minecraft-server/modpacks/modpack.mrpack
 ```
 
-### Method 2: Using the deployment script
-
-Use the provided `scripts/deploy-modpack.sh` script:
+**Step 3: Deploy the server**
 
 ```bash
-# Edit the script to set your server details
-vim scripts/deploy-modpack.sh
+# SSH into the server (add -p PORT if using custom SSH port)
+ssh user@server
 
-# Run the deployment
-./scripts/deploy-modpack.sh /path/to/local/modpack
+# Navigate to server directory
+cd /path/to/minecraft-server
+
+# Restart the server (it will automatically use the new modpack)
+make restart
 ```
 
-### Method 3: Direct server-side copy
+### Modifying a Modpack
+
+If you want to customize a modpack (add/remove mods):
+
+1. **Download the base modpack** from Modrinth
+2. **Extract and modify** it locally using a launcher or manually
+3. **Export as .mrpack** from your launcher
+4. **Copy to server** using the scp command above
+5. **Restart** with `make restart`
+
+**Important**: The server automatically installs mods from the .mrpack file. Your customizations will persist as long as you keep your modified .mrpack file.
+
+### Switching Between Modpacks
 
 ```bash
-# Copy your modpack directly on the server
-cp -r /path/to/modpack/mods/* /path/to/minecraft-server/mods/
-cp -r /path/to/modpack/config/* /path/to/minecraft-server/minecraft-data/config/
+# 1. Stop the server
+make undeploy
 
-# Start the server
+# 2. Backup current data
+make backup
+
+# 3. Clean old modpack data
+rm -rf ./minecraft-data/*
+rm -rf ./mods/*
+
+# 4. Copy new .mrpack file (add -P PORT if using custom SSH port)
+scp new-modpack.mrpack user@server:/path/to/minecraft-server/modpacks/modpack.mrpack
+
+# 5. Start with new modpack
 make deploy
 ```
 
