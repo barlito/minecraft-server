@@ -1,0 +1,63 @@
+name: Deploy Minecraft Server
+
+on:
+  workflow_dispatch:
+    inputs:
+      save_world:
+        description: 'Save world before redeploying'
+        required: false
+        type: boolean
+        default: true
+      undeploy:
+        description: 'Full restart: undeploy first, then deploy (clean state)'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      SSH_CMD: ssh -p ${{ vars.SERVER_PORT }} ${{ vars.SERVER_USERNAME }}@${{ vars.SERVER_HOST }}
+      # The branch selected in the GitHub Actions UI determines the instance to deploy.
+      # Each branch maps to a server folder: /home/ubuntu/games/<branch-name>
+      INSTANCE_PATH: /home/ubuntu/games/${{ github.ref_name }}
+
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p ${{ vars.SERVER_PORT }} -H ${{ vars.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Save World
+        if: ${{ inputs.save_world == true }}
+        continue-on-error: true
+        id: save
+        run: |
+          echo "💾 Saving world..."
+          ${{ env.SSH_CMD }} "cd ${{ env.INSTANCE_PATH }} && make save-world"
+
+      - name: Undeploy Stack
+        if: ${{ inputs.undeploy == true }}
+        run: |
+          echo "🛑 Stopping server..."
+          ${{ env.SSH_CMD }} "cd ${{ env.INSTANCE_PATH }} && make stop"
+          echo "⏳ Waiting for stack to be fully removed..."
+          sleep 5
+
+      - name: Deploy Stack
+        run: |
+          echo "🚀 Deploying server..."
+          ${{ env.SSH_CMD }} "cd ${{ env.INSTANCE_PATH }} && make deploy"
+
+      - name: Verify Deployment
+        run: |
+          echo "⏳ Waiting for service to be ready..."
+          sleep 15
+          ${{ env.SSH_CMD }} "cd ${{ env.INSTANCE_PATH }} && make status"
