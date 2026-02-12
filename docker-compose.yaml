@@ -2,26 +2,30 @@ version: "3"
 
 services:
   mc:
-    image: itzg/minecraft-server:java21
+    image: itzg/minecraft-server:java21-jdk
     ports:
-      - 20242:25565
+      - 25565:25565
+      - 24454:24454/udp
     environment:
-      EULA: "TRUE"
+      JVM_OPTS: "-Xms20G -Xmx20G -XX:+UseZGC -XX:+ZGenerational -XX:+AlwaysPreTouch -XX:+UseStringDeduplication"
+      EULA: "TRUE"        
       DIFFICULTY: "hard"
       SERVER_NAME: "Youlz Cobblemon Server"
       TYPE: "MODRINTH"
       MODRINTH_MODPACK: "/modpacks/modpack.mrpack"
-      OPS: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553"
+      OPS: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553,ggWarny,d04cc87c-c844-4a66-8800-226b269b5356"
       EXISTING_OPS_FILE: "SYNCHRONIZE"
-      MEMORY: 8G
+      MEMORY: 20G
       MOTD: "Bienvenue sur le serveur Cobblemon des Youlz"
       ICON: "https://cdn.discordapp.com/icons/188982456324456448/6d541df933bd05689ab8a545bbbce6cb.webp"
-      ENABLE_AUTOPAUSE: "TRUE"
+      ENABLE_AUTOPAUSE: "FALSE"
       ENABLE_WHITELIST: "TRUE"
-      OVERRIDE_WHITELIST: "TRUE"
-      WHITELIST: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553,ggWarny,d04cc87c-c844-4a66-8800-226b269b5356,ggWilly,a399c5cc-a4a4-4106-9005-3e1c58c20d16,Tykaa,9f672e7f-ad9f-4271-aaac-784129b3a99e"
+      OVERRIDE_WHITELIST: "FALSE"
+      WHITELIST: "Barlitox,4e5998ca-2e18-49bf-8a0a-60c5de0a6553,ggWarny,d04cc87c-c844-4a66-8800-226b269b5356"
       MAX_TICK_TIME: -1
-      VIEW_DISTANCE: 32
+      VIEW_DISTANCE: 6
+      SEED: "6201846587634054895"
+      SPAWN_PROTECTION: 0
     tty: true
     stdin_open: true
     restart: unless-stopped

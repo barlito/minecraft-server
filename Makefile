@@ -1,5 +1,5 @@
 # Get container ID using docker-compose
-app_container_id = $(shell docker-compose ps -q mc)
+app_container_id = $(shell docker compose ps -q mc)
 
 .PHONY: bash
 bash:
@@ -7,12 +7,12 @@ bash:
 
 .PHONY: deploy
 deploy:
-	docker-compose up -d
+	docker compose up -d
 
 .PHONY: undeploy
 undeploy:
 	make save-world
-	docker-compose down
+	docker compose down
 
 .PHONY: restart
 restart:
@@ -25,7 +25,7 @@ save-world:
 
 .PHONY: logs
 logs:
-	docker-compose logs -f
+	docker compose logs -f
 
 .PHONY: send-message
 send-message:
@@ -33,7 +33,7 @@ send-message:
 
 .PHONY: status
 status:
-	docker-compose ps
+	docker compose ps
 
 .PHONY: backup
 backup:
@@ -43,6 +43,7 @@ backup:
 
 .PHONY: console
 console:
+	echo "To get out docker attach : CTRL + P followed by CTRL + Q"
 	docker attach $(app_container_id)
 
 .PHONY: help
