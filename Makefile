@@ -14,6 +14,10 @@ undeploy:
 	make save-world
 	docker compose down
 
+.PHONY: stop
+stop:
+	docker-compose down
+
 .PHONY: restart
 restart:
 	make undeploy
@@ -51,6 +55,7 @@ help:
 	@echo "Available commands:"
 	@echo "  make deploy        - Start the Minecraft server"
 	@echo "  make undeploy      - Save world and stop the server"
+	@echo "  make stop          - Stop the server without saving (useful if server crashed)"
 	@echo "  make restart       - Restart the server"
 	@echo "  make logs          - Stream server logs"
 	@echo "  make status        - Show container status"

@@ -269,6 +269,7 @@ All commands use the `Makefile` for convenience:
 ```bash
 make deploy        # Start the server
 make undeploy      # Save world and stop the server
+make stop          # Stop the server without saving (useful if server crashed)
 make restart       # Full restart (save + stop + start)
 make logs          # Stream server logs (Ctrl+C to exit)
 make status        # Show container status
