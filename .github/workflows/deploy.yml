@@ -14,14 +14,6 @@ on:
         type: boolean
         default: true
 
-<<<<<<< HEAD
-=======
-  SSH_CMD: ssh -p ${{ vars.SERVER_PORT }} ${{ vars.SERVER_USERNAME }}@${{ vars.SERVER_HOST }}
-  # The branch selected in the GitHub Actions UI determines the instance to deploy.
-  # Each branch maps to a server folder: /home/ubuntu/games/<branch-name>
-  INSTANCE_PATH: /home/ubuntu/games/${{ github.ref_name }}
-
->>>>>>> d479cab (Add deploy workflow)
 jobs:
   deploy:
     runs-on: ubuntu-latest
